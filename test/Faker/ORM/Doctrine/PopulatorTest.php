@@ -19,5 +19,23 @@ final class PopulatorTest extends TestCase
         $objectManager = $this->createMock('Doctrine\Common\Persistence\ObjectManager');
 
         self::assertEmpty($populator->execute($objectManager));
+        self::assertEmpty($this->getTestResultObject()->warnings());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testClassGenerationWithBackwardCompatibilityForDoctrineOldInterfaces(): void
+    {
+        // Add old interface to autoloader
+        $loader = new \Composer\Autoload\ClassLoader();
+        $loader->addPsr4('Doctrine\Common\Persistence\Mapping\\', __DIR__ . '/stubs/');
+        $loader->register();
+        
+        $populator = new Populator($this->faker);
+
+        $objectManager = $this->createMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $populator->execute($objectManager);
+        self::assertEmpty($this->getTestResultObject()->warnings());
     }
 }
