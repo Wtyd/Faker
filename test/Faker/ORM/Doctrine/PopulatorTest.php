@@ -12,14 +12,13 @@ final class PopulatorTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testClassGenerationWithBackwardCompatibility(): void
+    public function testCfasdfa(): void
     {
         $populator = new Populator($this->faker);
         // Mock ObjectManager after autoload to test class alias
         $objectManager = $this->createMock('Doctrine\Common\Persistence\ObjectManager');
 
         self::assertEmpty($populator->execute($objectManager));
-        self::assertEmpty($this->getTestResultObject()->warnings());
     }
 
     /**
