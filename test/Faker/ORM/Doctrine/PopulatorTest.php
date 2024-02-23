@@ -12,7 +12,7 @@ final class PopulatorTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testCfasdfa(): void
+    public function testClassGenerationWithBackwardCompatibility(): void
     {
         $populator = new Populator($this->faker);
         // Mock ObjectManager after autoload to test class alias
